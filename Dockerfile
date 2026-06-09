@@ -1,4 +1,4 @@
-FROM nvcr.io/nvidia/cuda:12.2.0-runtime-ubuntu20.04 AS base
+FROM nvidia/cuda:12.2.0-runtime-ubuntu20.04 AS base
 ARG LOCAL_BUILD="false"
 
 RUN rm /etc/apt/sources.list.d/cuda.list
