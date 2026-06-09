@@ -28,8 +28,15 @@ RUN ln -s /usr/lib/python3/dist-packages/gdcm.py /usr/lib/python3.9/gdcm.py 2>/d
 
 RUN python3.9 -m pip install --no-cache-dir --upgrade pip
 
+# Install a dummy python-gdcm so evalutils doesn't trigger a broken source build
+RUN mkdir -p /tmp/fake-gdcm && \
+    printf '[build-system]\nrequires = ["setuptools"]\nbuild-backend = "setuptools.build_meta"\n\n[project]\nname = "python-gdcm"\nversion = "3.0.99"\n' \
+    > /tmp/fake-gdcm/pyproject.toml && \
+    python3.9 -m pip install --no-cache-dir /tmp/fake-gdcm
+
 COPY requirements.txt /tmp/requirements.txt
-RUN python3.9 -m pip install --no-cache-dir -r /tmp/requirements.txt -f https://download.pytorch.org/whl/torch_stable.html
+RUN python3.9 -m pip install --no-cache-dir -r /tmp/requirements.txt \
+    -f https://download.pytorch.org/whl/torch_stable.html
 
 RUN git config --global advice.detachedHead false && \
     git clone --no-checkout https://github.com/MIC-DKFZ/nnUNet.git /opt/algorithm/nnunet/ && \
