@@ -11,5 +11,5 @@
   "pad_x_after": 64,
   "pad_y_before": 64,
   "pad_y_after": 64,
-  "model_path": "/opt/ml/model/nnUNet_results_focal/Dataset001_DeepLesion3D/nnUNetTrainerFocalLoss1000__nnUNetPlans__3d_fullres"
+  "model_path": "/opt/ml/model/nnUNet_results/Dataset001_DeepLesion3D/nnUNetTrainerFocalLoss1000__nnUNetPlans__3d_fullres"
 }
